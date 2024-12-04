@@ -16,9 +16,6 @@ namespace AIDreamDecoder.Entities
         public string Description { get; set; }
         public DreamAnalysis Analysis { get; set; } // Rüyanın analizi (1'e 1 ilişki)
 
-        public Dream()
-        {
-            CreatedAt = DateTime.UtcNow;
-        }
+       
     }
 }
