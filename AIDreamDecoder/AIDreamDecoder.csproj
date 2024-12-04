@@ -11,7 +11,6 @@
     <Folder Include="Exceptions\" />
     <Folder Include="Events\" />
     <Folder Include="Specifications\" />
-    <Folder Include="ValueObjects\" />
   </ItemGroup>
 
 </Project>
