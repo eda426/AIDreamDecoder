@@ -8,6 +8,7 @@ namespace AIDreamDecoder.Exceptions
 {
     public class OpenAiApiException : Exception
     {
+        //OpenAI API hatalarını yönetmek için özel exception sınıfı.
         public int StatusCode { get; }
 
         public OpenAiApiException(string message, int statusCode)

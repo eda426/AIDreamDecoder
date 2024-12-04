@@ -8,6 +8,7 @@ namespace AIDreamDecoder.Exceptions
 {
     public class InvalidDreamException : Exception
     {
+        //Geçersiz rüya açıklamaları için özel exception sınıfı.
         public InvalidDreamException(string message)
             : base(message)
         {
