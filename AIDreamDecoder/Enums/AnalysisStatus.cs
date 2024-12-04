@@ -8,8 +8,9 @@ namespace AIDreamDecoder.Enums
 {
     public enum AnalysisStatus
     {
-        Pending = 1,    // Analiz bekleniyor
-        Completed = 2,  // Analiz tamamlandı
-        Failed = 3      // Analiz başarısız
+        Pending = 0, // Analiz bekleniyor
+        InProgress = 1, // Analiz devam ediyor
+        Completed = 2, // Analiz tamamlandı
+        Failed = 3 // Analiz başarısız
     }
 }
