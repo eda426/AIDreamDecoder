@@ -5,8 +5,6 @@ VisualStudioVersion = 17.12.35521.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AD65F4F8-6F80-416E-88FC-957966C7058C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIDreamDecoder.Domainn", "AIDreamDecoder\AIDreamDecoder.Domainn.csproj", "{B5438C17-380C-4929-91A3-D945A23726C4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIDreamDecoder.Domain", "AIDreamDecoder.Domain\AIDreamDecoder.Domain.csproj", "{45043DCA-22C9-4E0A-9B38-2A0345E5B911}"
 EndProject
 Global
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B5438C17-380C-4929-91A3-D945A23726C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B5438C17-380C-4929-91A3-D945A23726C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B5438C17-380C-4929-91A3-D945A23726C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B5438C17-380C-4929-91A3-D945A23726C4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{45043DCA-22C9-4E0A-9B38-2A0345E5B911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{45043DCA-22C9-4E0A-9B38-2A0345E5B911}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45043DCA-22C9-4E0A-9B38-2A0345E5B911}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -28,7 +22,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B5438C17-380C-4929-91A3-D945A23726C4} = {AD65F4F8-6F80-416E-88FC-957966C7058C}
 		{45043DCA-22C9-4E0A-9B38-2A0345E5B911} = {AD65F4F8-6F80-416E-88FC-957966C7058C}
 	EndGlobalSection
 EndGlobal
