@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AD65F4F8-6F8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIDreamDecoder.Domain", "AIDreamDecoder.Domain\AIDreamDecoder.Domain.csproj", "{45043DCA-22C9-4E0A-9B38-2A0345E5B911}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIDreamDecoder.Application", "AIDreamDecoder.Application\AIDreamDecoder.Application.csproj", "{4C2ED055-91A9-4091-943A-266A611585BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,11 +19,16 @@ Global
 		{45043DCA-22C9-4E0A-9B38-2A0345E5B911}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45043DCA-22C9-4E0A-9B38-2A0345E5B911}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45043DCA-22C9-4E0A-9B38-2A0345E5B911}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C2ED055-91A9-4091-943A-266A611585BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C2ED055-91A9-4091-943A-266A611585BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C2ED055-91A9-4091-943A-266A611585BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C2ED055-91A9-4091-943A-266A611585BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{45043DCA-22C9-4E0A-9B38-2A0345E5B911} = {AD65F4F8-6F80-416E-88FC-957966C7058C}
+		{4C2ED055-91A9-4091-943A-266A611585BD} = {AD65F4F8-6F80-416E-88FC-957966C7058C}
 	EndGlobalSection
 EndGlobal
