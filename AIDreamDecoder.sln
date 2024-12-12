@@ -5,9 +5,11 @@ VisualStudioVersion = 17.12.35521.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AD65F4F8-6F80-416E-88FC-957966C7058C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIDreamDecoder.Domain", "AIDreamDecoder.Domain\AIDreamDecoder.Domain.csproj", "{45043DCA-22C9-4E0A-9B38-2A0345E5B911}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIDreamDecoder.Domain", "AIDreamDecoder.Domain\AIDreamDecoder.Domain.csproj", "{45043DCA-22C9-4E0A-9B38-2A0345E5B911}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIDreamDecoder.Application", "AIDreamDecoder.Application\AIDreamDecoder.Application.csproj", "{4C2ED055-91A9-4091-943A-266A611585BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AIDreamDecoder.Application", "AIDreamDecoder.Application\AIDreamDecoder.Application.csproj", "{4C2ED055-91A9-4091-943A-266A611585BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIDreamDecoder.Infrastructure", "AIDreamDecoder.Infrastructure\AIDreamDecoder.Infrastructure.csproj", "{12C6FCFC-36AB-45B8-97AA-F43CB6F0F5A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{4C2ED055-91A9-4091-943A-266A611585BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C2ED055-91A9-4091-943A-266A611585BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C2ED055-91A9-4091-943A-266A611585BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12C6FCFC-36AB-45B8-97AA-F43CB6F0F5A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12C6FCFC-36AB-45B8-97AA-F43CB6F0F5A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12C6FCFC-36AB-45B8-97AA-F43CB6F0F5A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12C6FCFC-36AB-45B8-97AA-F43CB6F0F5A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,5 +36,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{45043DCA-22C9-4E0A-9B38-2A0345E5B911} = {AD65F4F8-6F80-416E-88FC-957966C7058C}
 		{4C2ED055-91A9-4091-943A-266A611585BD} = {AD65F4F8-6F80-416E-88FC-957966C7058C}
+		{12C6FCFC-36AB-45B8-97AA-F43CB6F0F5A3} = {AD65F4F8-6F80-416E-88FC-957966C7058C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {088890B4-3D3F-4675-B20B-3A72044D5641}
 	EndGlobalSection
 EndGlobal
