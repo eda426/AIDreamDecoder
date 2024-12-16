@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AIDreamDecoder.Domain\AIDreamDecoder.Domain.csproj" />
+    <ProjectReference Include="..\AIDreamDecoder.Application\AIDreamDecoder.Application.csproj" />
   </ItemGroup>
 
 </Project>
