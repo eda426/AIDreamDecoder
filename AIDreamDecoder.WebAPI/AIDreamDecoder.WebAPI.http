@@ -1,0 +1,6 @@
+@AIDreamDecoder.WebAPI_HostAddress = http://localhost:5114
+
+GET {{AIDreamDecoder.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
