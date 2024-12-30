@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AIDreamDecoder.Application\AIDreamDecoder.Application.csproj" />
     <ProjectReference Include="..\AIDreamDecoder.Infrastructure\AIDreamDecoder.Infrastructure.csproj" />
   </ItemGroup>
