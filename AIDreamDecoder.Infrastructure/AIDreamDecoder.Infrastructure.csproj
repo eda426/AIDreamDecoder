@@ -14,4 +14,8 @@
     <ProjectReference Include="..\AIDreamDecoder.Application\AIDreamDecoder.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repository\" />
+  </ItemGroup>
+
 </Project>
