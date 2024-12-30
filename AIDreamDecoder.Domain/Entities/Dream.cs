@@ -8,7 +8,7 @@ namespace AIDreamDecoder.Domain.Entities
 {
     public class Dream
     {
-        public int Id { get; set; } // Benzersiz rüya kimliği
+        public Guid Id { get; set; } // Benzersiz rüya kimliği
         public Guid UserId { get; set; } // Rüyanın sahibi olan kullanıcının ID'si
         public string Description { get; set; } // Rüyanın metni
         public DateTime CreatedAt { get; set; } // Rüyanın oluşturulma tarihi

@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AIDreamDecoder.Application\AIDreamDecoder.Application.csproj" />
+    <ProjectReference Include="..\AIDreamDecoder.Domain\AIDreamDecoder.Domain.csproj" />
   </ItemGroup>
 
 </Project>
