@@ -1,3 +1,6 @@
+using AIDreamDecoder.Application.Interfaces;
+using AIDreamDecoder.Infrastructure.Persistence.Configurations;
+using AIDreamDecoder.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -20,8 +23,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+/*builder.Services.AddJwtAuthentication(builder.Configuration);
+
+// Register services
+builder.Services.AddScoped<ITokenService, TokenService>();
+//builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IDreamService, DreamService>();*/
+
+// Add authorization
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
 
+// Configure middleware
 app.UseAuthentication();
 app.UseAuthorization();
 
