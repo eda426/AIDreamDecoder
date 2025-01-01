@@ -1,53 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-//using Microsoft.Extensions.Configuration;
+﻿using AIDreamDecoder.Application.Dtos.UserDtos;
+using AIDreamDecoder.Application.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using AIDreamDecoder.Application.Interfaces;
-using AIDreamDecoder.Application.Dtos.UserDtos;
-
+using System.Text;
 
 namespace AIDreamDecoder.Infrastructure.Services
 {
-    public class TokenService // ITokenService
+    public class TokenService : ITokenService
     {
-       /* private readonly IConfiguration _configuration;
+        private readonly string _secretKey;
+        private readonly string _issuer;
+        private readonly string _audience;
 
-        public TokenService(IConfiguration configuration)
+        
+        public TokenService(string secretKey, string issuer, string audience)
         {
-            _configuration = configuration;
+            _secretKey = secretKey;
+            _issuer = issuer;
+            _audience = audience;
         }
 
-        public string GenerateToken(UserDto user)
+        public string GenerateToken(string username)
         {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Name, user.Name)
-            };
-
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.UTF8.GetBytes(_secretKey);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddDays(Convert.ToDouble(_configuration["Jwt:ExpiryInDays"])),
-                SigningCredentials = credentials,
-                Issuer = _configuration["Jwt:Issuer"],
-                Audience = _configuration["Jwt:Audience"]
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, username)
+                }),
+                Expires = DateTime.UtcNow.AddMinutes(30), // Token geçerlilik süresi
+                Issuer = _issuer,
+                Audience = _audience,
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
-            var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            return tokenHandler.WriteToken(token);*/
+            return tokenHandler.WriteToken(token);
         }
+
+       
     }
-
-
+}

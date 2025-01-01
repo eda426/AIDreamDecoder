@@ -9,7 +9,7 @@ namespace AIDreamDecoder.Application.Interfaces
 {
     public interface ITokenService
     {
-        string GenerateToken(UserDto user);
-        
+        string GenerateToken(string username);
+
     }
 }
