@@ -2,16 +2,26 @@ using AIDreamDecoder.Application.Interfaces;
 using AIDreamDecoder.Infrastructure.Persistence.Configurations;
 using AIDreamDecoder.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// JWT Configuration
+var jwtConfig = new AuthenticationConfig
+{
+    SecretKey = "YourSuperSecretKey",
+    Issuer = "Issuer",
+    Audience = "Audience"
+};
+builder.Services.AddSingleton(jwtConfig);
 
+// Register TokenService
+builder.Services.AddScoped<ITokenService>(provider =>
+    new TokenService(jwtConfig.SecretKey, jwtConfig.Issuer, jwtConfig.Audience));
 
-
-
-// JWT Authentication
+// Add Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -21,25 +31,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = "Issuer",
-            ValidAudience = "Audience",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("YourSuperSecretKey"))
+            ValidIssuer = jwtConfig.Issuer,
+            ValidAudience = jwtConfig.Audience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.SecretKey))
         };
     });
 
-/*builder.Services.AddJwtAuthentication(builder.Configuration);
-
-// Register services
-builder.Services.AddScoped<ITokenService, TokenService>();
-//builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IDreamService, DreamService>();*/
-
-// Add authorization
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Configure middleware
+// Middleware
 app.UseAuthentication();
 app.UseAuthorization();
 
