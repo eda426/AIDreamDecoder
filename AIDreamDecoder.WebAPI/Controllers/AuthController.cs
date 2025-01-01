@@ -43,7 +43,7 @@ namespace AIDreamDecoder.WebAPI.Controllers
             {
                 return BadRequest(new { Message = ex.Message });
             }
-        }*/
+        }*/ //UserDtoyu kaldırdık bir dtoya ihtiyacımız yok burada
 
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest request)
