@@ -1,6 +1,7 @@
 ﻿using AIDreamDecoder.Application.Dtos.DreamDtos;
 using AIDreamDecoder.Application.Interfaces;
 using AIDreamDecoder.Domain.Entities;
+using AIDreamDecoder.Domain.Enums;
 using AIDreamDecoder.Infrastructure.Repositories; // Bu satırı ekleyin
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,13 @@ namespace AIDreamDecoder.Infrastructure.Services
 {
     public class DreamService : IDreamService
     {
+        private readonly IAIDreamInterpreterService _aiService;
         private readonly IDreamRepository _dreamRepository;
 
-        public DreamService(IDreamRepository dreamRepository)
+        public DreamService(IDreamRepository dreamRepository, IAIDreamInterpreterService aiService)
         {
             _dreamRepository = dreamRepository;
+            _aiService = aiService;
         }
 
         public async Task<List<DreamDto>> GetDreamsAsync()
@@ -52,9 +55,34 @@ namespace AIDreamDecoder.Infrastructure.Services
             return dream.Id;
         }
 
+        /*public async Task<DreamDto> AddDreamWithInterpretationAsync(DreamDto dreamDto)
+        {
+            // Get AI interpretation
+            var interpretation = await _aiService.InterpretDreamAsync(dreamDto.Description);
+
+            // Create dream entity
+            var dream = new Dream
+            {
+                UserId = dreamDto.Id,
+                Description = dreamDto.Description,
+                Analysis = new DreamAnalysis
+                {
+                    AnalysisResult = interpretation,
+                    Status = AnalysisStatus.Completed
+                }
+            };
+
+            // Save to database
+            await _dreamRepository.AddAsync(dream);
+
+            // Return DTO
+            return MapToDto(dream);
+        }*/
+
         public async Task<bool> DeleteDreamAsync(Guid id)
         {
             return await _dreamRepository.DeleteDreamAsync(id);
-        }
+        } 
+    
     }
 }

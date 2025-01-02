@@ -13,6 +13,7 @@ namespace AIDreamDecoder.Application.Interfaces
         Task<DreamDto> GetDreamByIdAsync(Guid id); // Belirli bir rüyayı getir
         Task<Guid> AddDreamAsync(DreamDto dreamDto); // Yeni rüya ekle
         Task<bool> DeleteDreamAsync(Guid id); // Rüya sil
+        //Task<DreamDto> AddDreamWithInterpretationAsync(DreamDto dreamDto); //AI için
     }
 
 }

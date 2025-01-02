@@ -1,6 +1,7 @@
 using AIDreamDecoder.Application.Interfaces;
 using AIDreamDecoder.Infrastructure.Persistence.Configurations;
 using AIDreamDecoder.Infrastructure.Services;
+using AIDreamDecoder.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -38,6 +39,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddAuthorization();
+
+// Add OpenAI settings
+builder.Services.Configure<OpenAISettings>(
+    builder.Configuration.GetSection("OpenAI"));
+
+// Register AI service
+//builder.Services.AddScoped<IAIDreamInterpreterService, OpenAIDreamInterpreterService>(); 
 
 var app = builder.Build();
 
