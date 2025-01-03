@@ -5,6 +5,7 @@ using AIDreamDecoder.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using OpenAI.Extensions;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,8 +45,11 @@ builder.Services.AddAuthorization();
 builder.Services.Configure<OpenAISettings>(
     builder.Configuration.GetSection("OpenAI"));
 
-// Register AI service
-//builder.Services.AddScoped<IAIDreamInterpreterService, OpenAIDreamInterpreterService>(); 
+
+builder.Services.AddOpenAIService(settings =>
+{
+    settings.ApiKey = builder.Configuration["OpenAI:ApiKey"];
+});
 
 var app = builder.Build();
 

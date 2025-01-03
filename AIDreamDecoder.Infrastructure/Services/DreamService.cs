@@ -55,7 +55,7 @@ namespace AIDreamDecoder.Infrastructure.Services
             return dream.Id;
         }
 
-        /*public async Task<DreamDto> AddDreamWithInterpretationAsync(DreamDto dreamDto)
+        public async Task<DreamDto> AddDreamWithInterpretationAsync(DreamDto dreamDto)
         {
             // Get AI interpretation
             var interpretation = await _aiService.InterpretDreamAsync(dreamDto.Description);
@@ -76,8 +76,8 @@ namespace AIDreamDecoder.Infrastructure.Services
             await _dreamRepository.AddAsync(dream);
 
             // Return DTO
-            return MapToDto(dream);
-        }*/
+            return dreamDto; //MapToDto burada hata verdiği için böyle döndüm
+        }
 
         public async Task<bool> DeleteDreamAsync(Guid id)
         {
