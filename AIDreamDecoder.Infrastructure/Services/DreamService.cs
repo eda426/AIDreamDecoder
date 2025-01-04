@@ -3,6 +3,7 @@ using AIDreamDecoder.Application.Interfaces;
 using AIDreamDecoder.Domain.Entities;
 using AIDreamDecoder.Domain.Enums;
 using AIDreamDecoder.Infrastructure.Repositories; // Bu satırı ekleyin
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,13 @@ namespace AIDreamDecoder.Infrastructure.Services
     {
         private readonly IAIDreamInterpreterService _aiService;
         private readonly IDreamRepository _dreamRepository;
+        private readonly ILogger<DreamService> _logger;
 
-        public DreamService(IDreamRepository dreamRepository, IAIDreamInterpreterService aiService)
+        public DreamService(IDreamRepository dreamRepository, IAIDreamInterpreterService aiService, ILogger<DreamService> logger)
         {
             _dreamRepository = dreamRepository;
             _aiService = aiService;
+            _logger = logger;
         }
 
         public async Task<List<DreamDto>> GetDreamsAsync()
@@ -45,14 +48,44 @@ namespace AIDreamDecoder.Infrastructure.Services
 
         public async Task<Guid> AddDreamAsync(DreamDto dreamDto)
         {
-            var dream = new Dream
+            try
+            {
+                _logger.LogInformation("Starting dream interpretation for user {Id}", dreamDto.Id);
+
+                //Get AI interpretation
+                var interpretation = await _aiService.InterpretDreamAsync(dreamDto.Description);
+
+                var dream = new Dream
+                {
+                    Id = dreamDto.Id,
+                    Description = dreamDto.Description,
+                    Analysis = new DreamAnalysis
+                    {
+                        AnalysisResult = interpretation,
+                        Status = AnalysisStatus.Completed,
+                        CreatedAt = DateTime.Now,
+                    }
+                };
+
+                await _dreamRepository.AddAsync(dream);
+                _logger.LogInformation("Successfully saved dream and interpretation for user {Id}", dreamDto.Id);
+                
+                return dream.Id; //Eğer kaydedilen rüyanın sadece Idsi bize lazımsa ID Dönüyoruz, tüm bilgilerini istersek MapToDto(dream) yazmamız lazım. Ama bunun için de yukarı da Task<DreamDto> olarak güncellenmeli.
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Eror processing dream for user {Id}", dreamDto.Id);
+                throw new ApplicationException("Failed to process dream interpretation", ex);
+            }
+            /*var dream1 = new Dream
             {
                 Id = Guid.NewGuid(),
                 Description = dreamDto.Description,
             };
 
             await _dreamRepository.AddDreamAsync(dream);
-            return dream.Id;
+            return dream.Id;*/
         }
 
         public async Task<DreamDto> AddDreamWithInterpretationAsync(DreamDto dreamDto)
@@ -82,7 +115,6 @@ namespace AIDreamDecoder.Infrastructure.Services
         public async Task<bool> DeleteDreamAsync(Guid id)
         {
             return await _dreamRepository.DeleteDreamAsync(id);
-        } 
-    
+        }
     }
 }
