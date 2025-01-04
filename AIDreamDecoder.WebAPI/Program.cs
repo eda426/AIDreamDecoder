@@ -51,6 +51,11 @@ builder.Services.AddOpenAIService(settings =>
     settings.ApiKey = builder.Configuration["OpenAI:ApiKey"];
 });
 
+// Register our services
+builder.Services.Configure<OpenAISettings>(builder.Configuration.GetSection("OpenAI"));
+builder.Services.AddScoped<IAIDreamInterpreterService, OpenAIDreamInterpreterService>();
+builder.Services.AddScoped<IDreamService, DreamService>();
+
 var app = builder.Build();
 
 // Middleware
