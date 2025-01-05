@@ -1,7 +1,10 @@
 using AIDreamDecoder.Application.Interfaces;
+using AIDreamDecoder.Infrastructure.Persistence;
 using AIDreamDecoder.Infrastructure.Persistence.Configurations;
+using AIDreamDecoder.Infrastructure.Repositories;
 using AIDreamDecoder.Infrastructure.Services;
 using AIDreamDecoder.Infrastructure.Settings;
+using AIDreamDecoder.WebAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -20,8 +23,8 @@ var jwtConfig = new AuthenticationConfig
 builder.Services.AddSingleton(jwtConfig);
 
 // Register TokenService
-builder.Services.AddScoped<ITokenService>(provider =>
-    new TokenService(jwtConfig.SecretKey, jwtConfig.Issuer, jwtConfig.Audience));
+builder.Services.AddScoped<IJwtService>(provider =>
+    new JwtService(jwtConfig.SecretKey, jwtConfig.Issuer, jwtConfig.Audience));
 
 // Add Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -54,9 +57,19 @@ builder.Services.AddOpenAIService(settings =>
 // Register our services
 builder.Services.Configure<OpenAISettings>(builder.Configuration.GetSection("OpenAI"));
 builder.Services.AddScoped<IAIDreamInterpreterService, OpenAIDreamInterpreterService>();
+builder.Services.AddSingleton<IRootPathService>(new RootPathManager(builder.Environment.WebRootPath));
+builder.Services.AddScoped<IDreamRepository, DreamRepository>();
 builder.Services.AddScoped<IDreamService, DreamService>();
+//builder.Services.AddDbContext<AIDreamDecoderDbContext>(options=>options.)
 
 var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 // Middleware
 app.UseAuthentication();

@@ -7,14 +7,14 @@ using System.Text;
 
 namespace AIDreamDecoder.Infrastructure.Services
 {
-    public class TokenService : ITokenService
+    public class JwtService : IJwtService
     {
         private readonly string _secretKey;
         private readonly string _issuer;
         private readonly string _audience;
 
         
-        public TokenService(string secretKey, string issuer, string audience)
+        public JwtService(string secretKey, string issuer, string audience)
         {
             _secretKey = secretKey;
             _issuer = issuer;
