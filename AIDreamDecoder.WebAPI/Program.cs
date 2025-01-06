@@ -6,10 +6,12 @@ using AIDreamDecoder.Infrastructure.Services;
 using AIDreamDecoder.Infrastructure.Settings;
 using AIDreamDecoder.WebAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using OpenAI.Extensions;
 using System.Text;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,13 +56,23 @@ builder.Services.AddOpenAIService(settings =>
     settings.ApiKey = builder.Configuration["OpenAI:ApiKey"];
 });
 
+
+builder.Services.AddDbContext<AIDreamDecoderDbContext>(options => 
+options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
 // Register our services
 builder.Services.Configure<OpenAISettings>(builder.Configuration.GetSection("OpenAI"));
 builder.Services.AddScoped<IAIDreamInterpreterService, OpenAIDreamInterpreterService>();
 builder.Services.AddSingleton<IRootPathService>(new RootPathManager(builder.Environment.WebRootPath));
-builder.Services.AddScoped<IDreamRepository, DreamRepository>();
 builder.Services.AddScoped<IDreamService, DreamService>();
-//builder.Services.AddDbContext<AIDreamDecoderDbContext>(options=>options.)
+builder.Services.AddScoped<IDreamRepository, DreamRepository>();
+
+builder.Services.AddControllers();
+
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -78,3 +90,8 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+static object GetUseNpgsql(DbContextOptionsBuilder options)
+{
+    return options.UseNpgsql();
+}
