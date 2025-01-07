@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AIDreamDecoder.Domain.Entities;
 using AIDreamDecoder.Domain.Specifications;
+using AIDreamDecoder.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace AIDreamDecoder.Infrastructure.Persistence

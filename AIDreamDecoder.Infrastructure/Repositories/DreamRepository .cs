@@ -1,5 +1,5 @@
 ﻿using AIDreamDecoder.Domain.Entities;
-using AIDreamDecoder.Infrastructure.Persistence;
+using AIDreamDecoder.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
