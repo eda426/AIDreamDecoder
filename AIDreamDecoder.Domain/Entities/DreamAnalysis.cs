@@ -9,8 +9,8 @@ namespace AIDreamDecoder.Domain.Entities
 {
     public class DreamAnalysis
     {
-        public int Id { get; set; } // Benzersiz analiz kimliği
-        public int DreamId { get; set; } // Analizi yapılan rüyanın ID'si
+        public Guid Id { get; set; } // Benzersiz analiz kimliği
+        public Guid DreamId { get; set; } // Analizi yapılan rüyanın ID'si
         public string AnalysisResult { get; set; } // Analiz sonucu (örneğin, anlamlar veya yorumlar)
         public AnalysisStatus Status { get; set; } // Analizin durumu
         public DateTime CreatedAt { get; set; } // Analizin oluşturulma tarihi
