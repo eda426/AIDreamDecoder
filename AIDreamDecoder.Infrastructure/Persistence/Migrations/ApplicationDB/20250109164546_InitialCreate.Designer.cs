@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AIDreamDecoder.Infrastructure.Persistence.Migrations.ApplicationDB
 {
     [DbContext(typeof(AIDreamDecoderDbContext))]
-    [Migration("20250108130517_InitialCreate")]
+    [Migration("20250109164546_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -99,16 +99,6 @@ namespace AIDreamDecoder.Infrastructure.Persistence.Migrations.ApplicationDB
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("4d7b6b79-8fb3-4e1d-9211-d917f498d197"),
-                            CreatedAt = new DateTime(2025, 1, 8, 16, 5, 17, 435, DateTimeKind.Local).AddTicks(9996),
-                            Email = "AIDreamDecoder@gmail.com",
-                            Name = "AIDreamDecoder",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMybI9L9ez2TkO6VbwQUFhiV/jLF4U75LX7N33rgZfpa1LdEOi9KwiGpvIzZKtswFw=="
-                        });
                 });
 
             modelBuilder.Entity("AIDreamDecoder.Domain.Entities.Dream", b =>

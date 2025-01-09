@@ -67,11 +67,6 @@ namespace AIDreamDecoder.Infrastructure.Persistence.Migrations.ApplicationDB
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "CreatedAt", "Email", "Name", "PasswordHash" },
-                values: new object[] { new Guid("4d7b6b79-8fb3-4e1d-9211-d917f498d197"), new DateTime(2025, 1, 8, 16, 5, 17, 435, DateTimeKind.Local).AddTicks(9996), "AIDreamDecoder@gmail.com", "AIDreamDecoder", "AQAAAAIAAYagAAAAEMybI9L9ez2TkO6VbwQUFhiV/jLF4U75LX7N33rgZfpa1LdEOi9KwiGpvIzZKtswFw==" });
-
             migrationBuilder.CreateIndex(
                 name: "IX_DreamAnalyses_DreamId",
                 table: "DreamAnalyses",
