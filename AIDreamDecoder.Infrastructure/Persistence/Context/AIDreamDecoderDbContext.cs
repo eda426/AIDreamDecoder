@@ -21,7 +21,7 @@ namespace AIDreamDecoder.Infrastructure.Persistence.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            
 
             // İlişkileri ve kuralları tanımlayın
             modelBuilder.Entity<Dream>()
@@ -34,7 +34,6 @@ namespace AIDreamDecoder.Infrastructure.Persistence.Context
                 .WithOne()
                 .HasForeignKey(d => d.UserId);
 
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AIDreamDecoderDbContext).Assembly);
         }
     }
 }
