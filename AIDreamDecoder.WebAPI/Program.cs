@@ -1,4 +1,5 @@
 using AIDreamDecoder.Application.Interfaces;
+using AIDreamDecoder.Domain.Entities;
 using AIDreamDecoder.Infrastructure.Persistence.Configurations;
 using AIDreamDecoder.Infrastructure.Persistence.Context;
 using AIDreamDecoder.Infrastructure.Repositories;
@@ -6,6 +7,7 @@ using AIDreamDecoder.Infrastructure.Services;
 using AIDreamDecoder.Infrastructure.Settings;
 using AIDreamDecoder.WebAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -67,6 +69,10 @@ builder.Services.AddScoped<IAIDreamInterpreterService, OpenAIDreamInterpreterSer
 builder.Services.AddSingleton<IRootPathService>(new RootPathManager(builder.Environment.WebRootPath));
 builder.Services.AddScoped<IDreamService, DreamService>();
 builder.Services.AddScoped<IDreamRepository, DreamRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+
+
 
 builder.Services.AddControllers();
 
