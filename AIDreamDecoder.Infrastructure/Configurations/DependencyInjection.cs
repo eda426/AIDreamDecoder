@@ -15,9 +15,6 @@ namespace AIDreamDecoder.Infrastructure.Configurations
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, string connectionString)
         {
-            //services.AddDbContext<AIDreamDecoderDbContext>(options =>
-                //options.UseSqlServer(connectionString)); // SQL Server kullanımı
-
             services.AddScoped(typeof(Repository<>)); // Generic Repository'yi servis olarak ekliyoruz
             services.AddScoped<DreamService>(); // DreamService'i servis olarak ekliyoruz
 
