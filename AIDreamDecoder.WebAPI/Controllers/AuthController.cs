@@ -1,8 +1,10 @@
 ﻿using AIDreamDecoder.Application.Common.Helpers;
+using AIDreamDecoder.Application.Common.Models;
 using AIDreamDecoder.Application.Dtos.UserDtos;
 using AIDreamDecoder.Application.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AIDreamDecoder.WebAPI.Controllers
 {
@@ -31,7 +33,8 @@ namespace AIDreamDecoder.WebAPI.Controllers
             }
         }
 
-        /*[HttpPost("login")]
+
+        [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login([FromBody] UserLoginDto loginDto)
         {
             try
@@ -43,26 +46,8 @@ namespace AIDreamDecoder.WebAPI.Controllers
             {
                 return BadRequest(new { Message = ex.Message });
             }
-        }*/ //UserDtoyu kaldırdık bir dtoya ihtiyacımız yok burada
+        } //UserDtoyu kaldırdık bir dtoya ihtiyacımız yok burada
 
-        [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginRequest request)
-        {
-            // Kullanıcı doğrulama işlemi yapılır (örnek olarak basit bir kontrol eklenmiştir).
-            if (request.Username == "admin" && request.Password == "password")
-            {
-                var token = JwtTokenHelper.GenerateToken(
-                    request.Username,
-                    "SuperSecretKey",
-                    "Issuer",
-                    "Audience",
-                    60); // Token süresi (dakika)
-
-                return Ok(new { Token = token });
-            }
-
-            return Unauthorized("Geçersiz kullanıcı adı veya şifre.");
-        }
     }
 
     public class LoginRequest

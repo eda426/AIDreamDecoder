@@ -20,9 +20,9 @@ var builder = WebApplication.CreateBuilder(args);
 // JWT Configuration
 var jwtConfig = new AuthenticationConfig
 {
-    SecretKey = "YourSuperSecretKey",
-    Issuer = "Issuer",
-    Audience = "Audience"
+    SecretKey = "N3Xx68uXqIwpQrtyL3vd8XwzK89ql5+Gpd1u2gRFBjk=",
+    Issuer = "AIDreamDecoder",
+    Audience = "AIDreamDecoder"
 };
 builder.Services.AddSingleton(jwtConfig);
 
@@ -45,6 +45,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.SecretKey))
         };
     });
+
 
 builder.Services.AddAuthorization();
 
