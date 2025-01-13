@@ -8,7 +8,7 @@ namespace AIDreamDecoder.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class DreamsController : ControllerBase
     {
         private readonly IDreamService _dreamService;
