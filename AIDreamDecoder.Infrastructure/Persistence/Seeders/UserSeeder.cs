@@ -20,7 +20,7 @@ namespace AIDreamDecoder.Infrastructure.Persistence.Seeders
                 Id = new Guid("4d7b6b79-8fb3-4e1d-9211-d917f498d197"),
                 Name = "AIDreamDecoder",
                 Email = "AIDreamDecoder@gmail.com",                
-                CreatedAt = DateTime.Now,
+                CreatedAt = DateTime.UtcNow,
                 Dreams = new List<Dream>()
             };
 
