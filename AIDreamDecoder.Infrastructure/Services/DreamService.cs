@@ -63,7 +63,7 @@ namespace AIDreamDecoder.Infrastructure.Services
                     {
                         AnalysisResult = interpretation,
                         Status = AnalysisStatus.Completed,
-                        CreatedAt = DateTime.Now,
+                        CreatedAt = DateTime.UtcNow,
                     }
                 };
 
