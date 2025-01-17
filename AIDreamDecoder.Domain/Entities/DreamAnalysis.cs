@@ -15,6 +15,9 @@ namespace AIDreamDecoder.Domain.Entities
         public AnalysisStatus Status { get; set; } // Analizin durumu
         public DateTime CreatedAt { get; set; } // Analizin oluşturulma tarihi
 
+        // Navigation Property
+        public Dream Dream { get; set; } // Analizi yapılan rüya
+
         public DreamAnalysis()
         {
             CreatedAt = DateTime.UtcNow;

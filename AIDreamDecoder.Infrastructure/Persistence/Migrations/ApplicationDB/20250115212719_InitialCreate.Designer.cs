@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AIDreamDecoder.Infrastructure.Persistence.Migrations.ApplicationDB
 {
     [DbContext(typeof(AIDreamDecoderDbContext))]
-    [Migration("20250115202804_InitialCreate")]
+    [Migration("20250115212719_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -103,20 +103,24 @@ namespace AIDreamDecoder.Infrastructure.Persistence.Migrations.ApplicationDB
 
             modelBuilder.Entity("AIDreamDecoder.Domain.Entities.Dream", b =>
                 {
-                    b.HasOne("AIDreamDecoder.Domain.Entities.User", null)
+                    b.HasOne("AIDreamDecoder.Domain.Entities.User", "User")
                         .WithMany("Dreams")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("AIDreamDecoder.Domain.Entities.DreamAnalysis", b =>
                 {
-                    b.HasOne("AIDreamDecoder.Domain.Entities.Dream", null)
+                    b.HasOne("AIDreamDecoder.Domain.Entities.Dream", "Dream")
                         .WithOne("Analysis")
                         .HasForeignKey("AIDreamDecoder.Domain.Entities.DreamAnalysis", "DreamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Dream");
                 });
 
             modelBuilder.Entity("AIDreamDecoder.Domain.Entities.Dream", b =>

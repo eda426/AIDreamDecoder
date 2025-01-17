@@ -21,18 +21,21 @@ namespace AIDreamDecoder.Infrastructure.Persistence.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
 
-            // İlişkileri ve kuralları tanımlayın
+
+            // User - Dream (One-to-Many)
             modelBuilder.Entity<Dream>()
-                .HasOne(d => d.Analysis)
-                .WithOne()
-                .HasForeignKey<DreamAnalysis>(da => da.DreamId);
+                .HasOne(d => d.User) // Dream tablosundaki User navigation property
+                .WithMany(u => u.Dreams) // User tablosundaki Dreams navigation property
+                .HasForeignKey(d => d.UserId) // Foreign Key: Dream.UserId
+                .OnDelete(DeleteBehavior.Cascade); // Kullanıcı silindiğinde rüyaları da silinsin.
 
-            modelBuilder.Entity<User>()
-                .HasMany(u => u.Dreams)
-                .WithOne()
-                .HasForeignKey(d => d.UserId);
+            // Dream - DreamAnalysis (One-to-One)
+            modelBuilder.Entity<Dream>()
+                .HasOne(d => d.Analysis) // Dream tablosundaki Analysis navigation property
+                .WithOne(a => a.Dream) // DreamAnalysis tablosundaki Dream navigation property
+                .HasForeignKey<DreamAnalysis>(a => a.DreamId) // Foreign Key: DreamAnalysis.DreamId
+                .OnDelete(DeleteBehavior.Cascade); // Rüya silindiğinde analiz de silinsin.
 
         }
     }
