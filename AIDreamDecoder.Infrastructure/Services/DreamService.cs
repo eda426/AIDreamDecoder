@@ -16,14 +16,27 @@ namespace AIDreamDecoder.Infrastructure.Services
         private readonly IAIDreamInterpreterService _aiService;
         private readonly IDreamRepository _dreamRepository;
         private readonly ILogger<DreamService> _logger;
+        private readonly IUserRepository _userRepository;
 
-        public DreamService(IDreamRepository dreamRepository, IAIDreamInterpreterService aiService, ILogger<DreamService> logger)
+        public DreamService(IDreamRepository dreamRepository, IAIDreamInterpreterService aiService, ILogger<DreamService> logger, IUserRepository userRepository)
         {
             _dreamRepository = dreamRepository;
             _aiService = aiService;
             _logger = logger;
+            _userRepository = userRepository;
         }
-
+        public async Task SomeMethod(Guid userId)
+        {
+            var user = await _userRepository.FindByIdAsync(userId);
+            if (user == null)
+            {
+                user = await _userRepository.CreateAsync(new User
+                {
+                    Name = "Default Name",
+                    Email = "default@example.com"
+                });
+            }
+        }
         public async Task<List<DreamDto>> GetDreamsAsync()
         {
             var dreams = await _dreamRepository.GetAllDreamsAsync();
