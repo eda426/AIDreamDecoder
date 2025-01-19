@@ -115,6 +115,8 @@ builder.Services.AddScoped<IDreamService, DreamService>();
 builder.Services.AddScoped<IDreamRepository, DreamRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 
 
 
@@ -133,7 +135,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.UseCors("AllowAll");
+app.UseCors("AllowAll");
 
 
 // Middleware
