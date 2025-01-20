@@ -52,6 +52,20 @@ namespace AIDreamDecoder.WebAPI.Controllers
             return CreatedAtAction(nameof(GetDream), new { id = dreamId }, dreamDto);
         }
 
+        [HttpPost("{userId}/dreams/transaction")]
+        public async Task<IActionResult> AddDreamWithTransaction(Guid userId, [FromBody] DreamDto dreamDto)
+        {
+            try
+            {
+                var dreamId = await _dreamService.AddDreamWithUserTransactionAsync(userId, dreamDto);
+                return Ok(new { DreamId = dreamId, Message = "Dream added with transaction successfully!" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Error = ex.Message });
+            }
+        }
+
         // PUT: api/Dream/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDream(Guid id, [FromBody] UpdateDreamRequestDto updateDto)

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AIDreamDecoder.Infrastructure.Persistence.Migrations.ApplicationDB
 {
     [DbContext(typeof(AIDreamDecoderDbContext))]
-    [Migration("20250115212719_InitialCreate")]
+    [Migration("20250120141804_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

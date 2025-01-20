@@ -21,7 +21,7 @@ namespace AIDreamDecoder.Infrastructure.Persistence.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            base.OnModelCreating(modelBuilder);
 
             // User - Dream (One-to-Many)
             modelBuilder.Entity<Dream>()
