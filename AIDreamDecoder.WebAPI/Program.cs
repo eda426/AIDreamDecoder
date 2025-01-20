@@ -104,7 +104,7 @@ builder.Services.AddOpenAIService(settings =>
 
 
 builder.Services.AddDbContext<AIDreamDecoderDbContext>(options => 
-options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
 // Register our services
@@ -116,8 +116,6 @@ builder.Services.AddScoped<IDreamRepository, DreamRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-
 
 
 builder.Services.AddControllers();

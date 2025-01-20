@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace AIDreamDecoder.Application.Dtos.DreamDtos
 {
     public class DreamDto
-    {
-        // Rüya detaylarını listelemek veya göstermek için kullanılır.
+    { // Rüya detaylarını listelemek veya göstermek için kullanılır.
         public Guid Id { get; set; } // Rüya kimliği
         public string Description { get; set; } // Rüyanın metin açıklaması
         public DateTime CreatedAt { get; set; } // Rüyanın oluşturulma tarihi
+        public Guid UserId { get; set; } // Rüyayı oluşturan kullanıcının kimliği
 
         public static DreamDto MapToDto(Dream dream)
         {
@@ -21,7 +21,7 @@ namespace AIDreamDecoder.Application.Dtos.DreamDtos
                 Id = dream.Id,
                 Description = dream.Description,
                 CreatedAt = dream.CreatedAt,
-
+                UserId = dream.UserId // Kullanıcı kimliği ekleniyor
             };
         }
     }

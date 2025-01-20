@@ -21,5 +21,6 @@ namespace AIDreamDecoder.Domain.Entities
         {
             CreatedAt = DateTime.UtcNow;
         }
+
     }
 }
