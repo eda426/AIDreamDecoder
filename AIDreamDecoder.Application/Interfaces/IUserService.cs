@@ -16,5 +16,6 @@ namespace AIDreamDecoder.Application.Interfaces
         Task<List<UserDto>> GetAllUsersAsync();
         Task<bool> UpdateUserAsync(Guid id, UserDto userDto);
         Task<bool> DeleteUserAsync(Guid id);
+        Task<bool> UserExists(Guid userId);
     }
 }

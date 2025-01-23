@@ -67,26 +67,43 @@ namespace AIDreamDecoder.Infrastructure.Services
 
         public async Task<User> GetUserByIdAsync(Guid userId)
         {
-            return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            return await _dbContext.Users.FirstOrDefaultAsync(u => u.UserId == userId);
         }
-
+        public async Task<bool> UserExists(Guid userId)
+        {
+            return await _dbContext.Users.AnyAsync(u => u.UserId == userId);
+        }
         public async Task<Guid> AddDreamAsync(DreamDto dreamDto)
         {
+            if (dreamDto.UserId == Guid.Empty)
+            {
+                _logger.LogWarning("User ID is empty in the request.");
+                throw new Exception("User ID cannot be empty.");
+            }
+
+            var userExists = await UserExists(dreamDto.UserId);
+            _logger.LogInformation($"User with ID {dreamDto.UserId} exists: {userExists}");
+
+            if (!userExists)
+            {
+                _logger.LogWarning($"User with ID {dreamDto.UserId} not found.");
+                throw new Exception($"User with ID {dreamDto.UserId} does not exist.");
+            }
+
             try
             {
-                _logger.LogInformation("Starting dream interpretation for user {Id}", dreamDto.UserId);
+                _logger.LogInformation("Starting dream interpretation for user {UserId}", dreamDto.UserId);
 
-                // Get AI interpretation
                 var interpretation = await _aiService.InterpretDreamAsync(dreamDto.Description);
 
                 var dream = new Dream
                 {
-                    Id = Guid.NewGuid(), // Yeni bir ID oluştur
-                    UserId = dreamDto.UserId, // Kullanıcı ID'sini ekle
+                    Id = Guid.NewGuid(),
+                    UserId = dreamDto.UserId,
                     Description = dreamDto.Description,
                     Analysis = new DreamAnalysis
                     {
-                        Id = Guid.NewGuid(), // Analiz için yeni bir ID oluştur
+                        Id = Guid.NewGuid(),
                         AnalysisResult = interpretation,
                         Status = AnalysisStatus.Completed,
                         CreatedAt = DateTime.UtcNow
@@ -94,13 +111,13 @@ namespace AIDreamDecoder.Infrastructure.Services
                 };
 
                 await _dreamRepository.AddAsync(dream);
-                _logger.LogInformation("Successfully saved dream and interpretation for user {Id}", dreamDto.UserId);
+                _logger.LogInformation("Successfully saved dream and interpretation for user {UserId}", dreamDto.UserId);
 
                 return dream.Id;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error processing dream for user {Id}", dreamDto.UserId);
+                _logger.LogError(ex, "Error processing dream for user {UserId}", dreamDto.UserId);
                 throw new ApplicationException("Failed to process dream interpretation", ex);
             }
             /*var dream1 = new Dream
@@ -151,7 +168,7 @@ namespace AIDreamDecoder.Infrastructure.Services
 
                 // Kullanıcıyı bul veya oluştur
                 var user = await _userRepository.FindByIdAsync(userId)
-                           ?? await _userRepository.CreateAsync(new User { Id = userId });
+                           ?? await _userRepository.CreateAsync(new User { UserId = userId });
 
                 _logger.LogInformation("User {UserId} found or created", userId);
 
@@ -161,7 +178,7 @@ namespace AIDreamDecoder.Infrastructure.Services
                 // Yeni rüya oluştur
                 var dream = new Dream
                 {
-                    UserId = user.Id,
+                    UserId = user.UserId,
                     Description = dreamDto.Description,
                     Analysis = new DreamAnalysis
                     {

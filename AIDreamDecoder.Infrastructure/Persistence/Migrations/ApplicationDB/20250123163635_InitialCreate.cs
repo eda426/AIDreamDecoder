@@ -15,7 +15,7 @@ namespace AIDreamDecoder.Infrastructure.Persistence.Migrations.ApplicationDB
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
                     PasswordHash = table.Column<string>(type: "text", nullable: false),
@@ -23,7 +23,7 @@ namespace AIDreamDecoder.Infrastructure.Persistence.Migrations.ApplicationDB
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -42,7 +42,7 @@ namespace AIDreamDecoder.Infrastructure.Persistence.Migrations.ApplicationDB
                         name: "FK_Dreams_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 

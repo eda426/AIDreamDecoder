@@ -9,7 +9,7 @@ namespace AIDreamDecoder.Domain.Entities
 {
     public class User
     {
-        public Guid Id { get; set; } // Benzersiz kullanıcı kimliği
+        public Guid UserId { get; set; } // Benzersiz kullanıcı kimliği
         public string Name { get; set; } // Kullanıcı adı
         public string Email { get; set; } // Kullanıcı email adresi
         public string PasswordHash { get; set; } // Şifre (hashlenmiş şekilde saklanır)

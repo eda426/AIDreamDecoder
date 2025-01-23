@@ -74,7 +74,7 @@ namespace AIDreamDecoder.Infrastructure.Persistence.Migrations.ApplicationDB
 
             modelBuilder.Entity("AIDreamDecoder.Domain.Entities.User", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
@@ -93,7 +93,7 @@ namespace AIDreamDecoder.Infrastructure.Persistence.Migrations.ApplicationDB
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
                 });

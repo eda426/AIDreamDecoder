@@ -19,7 +19,7 @@ namespace AIDreamDecoder.Infrastructure.Repositories
         {
             return await _dbContext.Users
                 .Include(u => u.Dreams) // Kullanıcının rüyalarını da çekmek için
-                .FirstOrDefaultAsync(u => u.Id == id);
+                .FirstOrDefaultAsync(u => u.UserId == id);
         }
 
         public async Task<User> FindByEmailAsync(string email)
@@ -31,7 +31,7 @@ namespace AIDreamDecoder.Infrastructure.Repositories
 
         public async Task<User> CreateAsync(User user)
         {
-            user.Id = Guid.NewGuid();
+            user.UserId = Guid.NewGuid();
             user.CreatedAt = DateTime.UtcNow;
 
             await _dbContext.Users.AddAsync(user);

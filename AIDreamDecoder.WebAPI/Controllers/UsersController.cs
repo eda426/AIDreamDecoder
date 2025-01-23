@@ -38,7 +38,7 @@ namespace AIDreamDecoder.WebAPI.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateUser(Guid id, [FromBody] UserDto userDto)
         {
-            if (id != userDto.Id)
+            if (id != userDto.UserId)
                 return BadRequest();
 
             var result = await _userService.UpdateUserAsync(id, userDto);
