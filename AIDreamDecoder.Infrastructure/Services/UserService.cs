@@ -104,9 +104,14 @@ namespace AIDreamDecoder.Infrastructure.Services
 
         private static UserDto MapToDto(User user) => new()
         {
-            Id = user.Id,
+            UserId = user.UserId,
             Email = user.Email,
             Name = user.Name
         };
+
+        public async Task<bool> UserExists(Guid userId)
+        {
+            return await _context.Users.AnyAsync(u => u.UserId == userId);
+        }
     }
 }
