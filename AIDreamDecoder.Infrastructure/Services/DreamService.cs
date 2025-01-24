@@ -119,15 +119,7 @@ namespace AIDreamDecoder.Infrastructure.Services
             {
                 _logger.LogError(ex, "Error processing dream for user {UserId}", dreamDto.UserId);
                 throw new ApplicationException("Failed to process dream interpretation", ex);
-            }
-            /*var dream1 = new Dream
-            {
-                Id = Guid.NewGuid(),
-                Description = dreamDto.Description,
-            };
-
-            await _dreamRepository.AddDreamAsync(dream);
-            return dream.Id;*/
+            } 
         }
 
         public async Task<DreamDto> AddDreamWithInterpretationAsync(DreamDto dreamDto)
@@ -156,7 +148,14 @@ namespace AIDreamDecoder.Infrastructure.Services
 
         public async Task<bool> DeleteDreamAsync(Guid id)
         {
-            return await _dreamRepository.DeleteDreamAsync(id);
+            var dream = await _dreamRepository.GetDreamByIdAsync(id);
+            if (dream == null)
+            {
+                return false;
+            }
+
+            await _dreamRepository.DeleteDreamAsync(id);
+            return true;
         }
 
         public async Task<Guid> AddDreamWithUserTransactionAsync(Guid userId, DreamDto dreamDto)
@@ -203,6 +202,18 @@ namespace AIDreamDecoder.Infrastructure.Services
                 await transaction.RollbackAsync();
                 throw new ApplicationException("Failed to process transaction", ex);
             }
+        }
+
+        public async Task UpdateDreamAsync(DreamDto dreamDto)
+        {
+            var dream = await _dreamRepository.GetDreamByIdAsync(dreamDto.Id);
+            if (dream == null)
+            {
+                throw new Exception("Dream not found.");
+            }
+
+            dream.Description = dreamDto.Description;
+            await _dreamRepository.UpdateAsync(dream);
         }
     }
 }

@@ -12,16 +12,19 @@ namespace AIDreamDecoder.WebAPI.Controllers
     public class DreamsController : ControllerBase
     {
         private readonly IDreamService _dreamService;
+        private readonly ILogger<DreamsController> _logger;
 
-        public DreamsController(IDreamService dreamService)
+        public DreamsController(IDreamService dreamService, ILogger<DreamsController> logger)
         {
             _dreamService = dreamService;
+            _logger = logger;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<DreamDto>>> GetDreams()
         {
             var dreams = await _dreamService.GetDreamsAsync();
+
             return Ok(dreams);
         }
 
@@ -30,7 +33,11 @@ namespace AIDreamDecoder.WebAPI.Controllers
         {
             var dream = await _dreamService.GetDreamByIdAsync(id);
             if (dream == null)
+            {
+                _logger.LogWarning($"Dream with ID {id} not found.");
                 return NotFound();
+            }
+               
             return Ok(dream);
 
         }
@@ -46,10 +53,11 @@ namespace AIDreamDecoder.WebAPI.Controllers
             var dreamId = await _dreamService.AddDreamAsync(new DreamDto
             {
                 Id = Guid.NewGuid(),
-                Description = dreamDto.DreamDescription
+                Description = dreamDto.DreamDescription,
+                UserId = dreamDto.UserId // UserId ekleniyor
             });
 
-            return CreatedAtAction(nameof(GetDream), new { id = dreamId }, dreamDto);
+            return CreatedAtAction(nameof(GetDream), new { id = dreamId, description =dreamDto.DreamDescription}, dreamDto);
         }
 
         [HttpPost("{userId}/dreams/transaction")]
@@ -62,6 +70,7 @@ namespace AIDreamDecoder.WebAPI.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error adding dream with transaction for user {UserId}", userId);
                 return BadRequest(new { Error = ex.Message });
             }
         }
@@ -81,9 +90,12 @@ namespace AIDreamDecoder.WebAPI.Controllers
                 return NotFound();
             }
 
-            // Update işlemini service katmanında yapabilirsiniz
-            dream.Description = updateDto.UpdatedDescription;
-            await _dreamService.AddDreamAsync(dream);
+            await _dreamService.UpdateDreamAsync(new DreamDto
+            {
+                Id = updateDto.DreamId,
+                Description = updateDto.UpdatedDescription,
+                UserId = dream.UserId // UserId korunuyor
+            });
 
             return NoContent();
         }
@@ -93,7 +105,10 @@ namespace AIDreamDecoder.WebAPI.Controllers
         {
             var result = await _dreamService.DeleteDreamAsync(id);
             if (!result)
-                return NotFound();
+               {
+            _logger.LogWarning($"Dream with ID {id} not found.");
+            return NotFound();
+        }
             return NoContent();
         }
     }

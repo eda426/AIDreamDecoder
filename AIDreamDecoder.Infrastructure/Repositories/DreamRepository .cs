@@ -50,6 +50,12 @@ namespace AIDreamDecoder.Infrastructure.Repositories
             await _context.SaveChangesAsync(); // Veritabanına değişiklikleri kaydet
             return dream; // Eklenen rüyayı geri döndür
         }
+
+        public async Task UpdateAsync(Dream dream)
+        {
+            _context.Dreams.Update(dream); // Rüya kaydını güncelle
+            await _context.SaveChangesAsync(); // Değişiklikleri kaydet
+        }
     }
 }
 
