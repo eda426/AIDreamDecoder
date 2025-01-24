@@ -15,5 +15,6 @@ namespace AIDreamDecoder.Infrastructure.Repositories
         Task AddDreamAsync(Dream dream);
         Task<bool> DeleteDreamAsync(Guid id);
         Task<Dream> AddAsync(Dream dream);
+        Task UpdateAsync(Dream dream);
     }
 }

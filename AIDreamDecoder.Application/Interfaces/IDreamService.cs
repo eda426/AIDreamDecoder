@@ -15,6 +15,7 @@ namespace AIDreamDecoder.Application.Interfaces
         Task<bool> DeleteDreamAsync(Guid id); // Rüya sil
         Task<DreamDto> AddDreamWithInterpretationAsync(DreamDto dreamDto); //AI için
         Task<Guid> AddDreamWithUserTransactionAsync(Guid userId, DreamDto dreamDto);
+        Task UpdateDreamAsync(DreamDto dreamDto);
     }
 
 }
