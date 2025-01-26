@@ -31,7 +31,8 @@ namespace AIDreamDecoder.Infrastructure.Services
                             Analyze dreams with psychological insight, cultural awareness, 
                             and sensitivity. Provide interpretations that are thoughtful, 
                             supportive, and non-judgmental. Consider multiple possible 
-                            meanings and their psychological significance."),
+                            meanings and their psychological significance. Always provide 
+                            a detailed and structured response."),
                         ChatMessage.FromUser($"Please interpret this dream: {dreamDescription}")
                     },
                     Model = Models.Gpt_4,
