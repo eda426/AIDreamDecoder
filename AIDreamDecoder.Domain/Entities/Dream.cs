@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AIDreamDecoder.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace AIDreamDecoder.Domain.Entities
         public Guid Id { get; set; } // Benzersiz rüya kimliği
         public Guid UserId { get; set; } // Rüyanın sahibi olan kullanıcının ID'si
         public string Description { get; set; } // Rüyanın metni
+        public InterpretationType InterpretationType { get; set; } //Rüyanın kime göre yorumlanacağı
         public DateTime CreatedAt { get; set; } // Rüyanın oluşturulma tarihi
         public DreamAnalysis Analysis { get; set; } // Rüyanın analizi (1'e 1 ilişki)
 
