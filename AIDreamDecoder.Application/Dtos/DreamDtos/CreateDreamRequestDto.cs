@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AIDreamDecoder.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,6 @@ namespace AIDreamDecoder.Application.Dtos.DreamDtos
         //Kullanıcının yeni bir rüya kaydı göndermesi için gerekli olan bilgileri içerir.
         public string DreamDescription { get; set; } // Rüyanın açıklaması
         public Guid UserId { get; set; } // Kullanıcının benzersiz kimliği
+        public InterpretationType InterpretationType { get; set; }
     }
 }

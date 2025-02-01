@@ -1,4 +1,5 @@
 ﻿using AIDreamDecoder.Domain.Entities;
+using AIDreamDecoder.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,6 +16,7 @@ namespace AIDreamDecoder.Application.Dtos.DreamDtos
         public string Description { get; set; } // Rüyanın metin açıklaması
         public DateTime CreatedAt { get; set; } // Rüyanın oluşturulma tarihi
         public Guid UserId { get; set; } // Rüyayı oluşturan kullanıcının kimliği
+        public InterpretationType InterpretationType { get; set; }
 
         public static DreamDto MapToDto(Dream dream)
         {
@@ -23,7 +25,8 @@ namespace AIDreamDecoder.Application.Dtos.DreamDtos
                 Id = dream.Id,
                 Description = dream.Description,
                 CreatedAt = dream.CreatedAt,
-                UserId = dream.UserId // Kullanıcı kimliği ekleniyor
+                UserId = dream.UserId, // Kullanıcı kimliği ekleniyor
+                InterpretationType= dream.InterpretationType
             };
         }
     }
