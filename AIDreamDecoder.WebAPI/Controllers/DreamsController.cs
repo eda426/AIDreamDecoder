@@ -54,7 +54,8 @@ namespace AIDreamDecoder.WebAPI.Controllers
             {
                 Id = Guid.NewGuid(),
                 Description = dreamDto.DreamDescription,
-                UserId = dreamDto.UserId // UserId ekleniyor
+                UserId = dreamDto.UserId, // UserId ekleniyor
+                InterpretationType = dreamDto.InterpretationType // Yorumlama türü ekleniyor
             });
 
             return CreatedAtAction(nameof(GetDream), new { id = dreamId, description =dreamDto.DreamDescription}, dreamDto);
@@ -94,7 +95,8 @@ namespace AIDreamDecoder.WebAPI.Controllers
             {
                 Id = updateDto.DreamId,
                 Description = updateDto.UpdatedDescription,
-                UserId = dream.UserId // UserId korunuyor
+                UserId = dream.UserId, // UserId korunuyor
+                InterpretationType = updateDto.UpdatedInterpretationType // Yorumlama türü güncelleniyor
             });
 
             return NoContent();
