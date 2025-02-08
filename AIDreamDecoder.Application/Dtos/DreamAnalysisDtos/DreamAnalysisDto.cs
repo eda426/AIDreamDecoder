@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AIDreamDecoder.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,6 @@ namespace AIDreamDecoder.Application.Dtos.DreamAnalysisDtos
         public string AnalysisResult { get; set; } // Analiz sonucu (yorum, anlam vs.)
         public string Status { get; set; } // Analiz durumu (Tamamlandı, İşleniyor vs.)
         public DateTime CreatedAt { get; set; } // Analizin oluşturulma tarihi
+        public InterpretationType InterpretationType { get; set; }
     }
 }

@@ -8,10 +8,10 @@ namespace AIDreamDecoder.Domain.Enums
 {
     public enum InterpretationType
     {
-        Freud = 1,
-        Jung = 2,
-        Aristoteles = 3,
-        Descartes = 4,
-        Islami = 5
+        Freud = 0,
+        Jung = 1,
+        Aristoteles = 2,
+        Descartes = 3,
+        Islami = 4
     }
 }

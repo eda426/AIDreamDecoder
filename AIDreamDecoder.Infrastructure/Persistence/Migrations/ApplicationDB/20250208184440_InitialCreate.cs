@@ -33,6 +33,7 @@ namespace AIDreamDecoder.Infrastructure.Persistence.Migrations.ApplicationDB
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
+                    InterpretationType = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
@@ -54,7 +55,8 @@ namespace AIDreamDecoder.Infrastructure.Persistence.Migrations.ApplicationDB
                     DreamId = table.Column<Guid>(type: "uuid", nullable: false),
                     AnalysisResult = table.Column<string>(type: "text", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    InterpretationType = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

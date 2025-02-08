@@ -35,6 +35,9 @@ namespace AIDreamDecoder.Infrastructure.Persistence.Migrations.ApplicationDB
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("InterpretationType")
+                        .HasColumnType("integer");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
@@ -60,6 +63,9 @@ namespace AIDreamDecoder.Infrastructure.Persistence.Migrations.ApplicationDB
 
                     b.Property<Guid>("DreamId")
                         .HasColumnType("uuid");
+
+                    b.Property<int>("InterpretationType")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer");

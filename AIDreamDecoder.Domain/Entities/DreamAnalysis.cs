@@ -14,6 +14,7 @@ namespace AIDreamDecoder.Domain.Entities
         public string AnalysisResult { get; set; } // Analiz sonucu (örneğin, anlamlar veya yorumlar)
         public AnalysisStatus Status { get; set; } // Analizin durumu
         public DateTime CreatedAt { get; set; } // Analizin oluşturulma tarihi
+        public InterpretationType InterpretationType { get; set; } //Yorumlama türü eklendi
 
         // Navigation Property
         public Dream Dream { get; set; } // Analizi yapılan rüya
