@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AIDreamDecoder.Infrastructure.Persistence.Migrations.ApplicationDB
 {
     [DbContext(typeof(AIDreamDecoderDbContext))]
-    [Migration("20250123163635_InitialCreate")]
+    [Migration("20250208184440_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -37,6 +37,9 @@ namespace AIDreamDecoder.Infrastructure.Persistence.Migrations.ApplicationDB
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("InterpretationType")
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -63,6 +66,9 @@ namespace AIDreamDecoder.Infrastructure.Persistence.Migrations.ApplicationDB
 
                     b.Property<Guid>("DreamId")
                         .HasColumnType("uuid");
+
+                    b.Property<int>("InterpretationType")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer");

@@ -94,7 +94,7 @@ namespace AIDreamDecoder.Infrastructure.Services
             {
                 _logger.LogInformation("Starting dream interpretation for user {UserId}", dreamDto.UserId);
 
-                var interpretation = await _aiService.InterpretDreamAsync(dreamDto.Description);
+                var interpretation = await _aiService.InterpretDreamAsync(dreamDto.Description, dreamDto.InterpretationType);
 
                 var dream = new Dream
                 {
@@ -106,7 +106,8 @@ namespace AIDreamDecoder.Infrastructure.Services
                         Id = Guid.NewGuid(),
                         AnalysisResult = interpretation,
                         Status = AnalysisStatus.Completed,
-                        CreatedAt = DateTime.UtcNow
+                        CreatedAt = DateTime.UtcNow,
+                        InterpretationType = dreamDto.InterpretationType
                     }
                 };
 
@@ -125,7 +126,7 @@ namespace AIDreamDecoder.Infrastructure.Services
         public async Task<DreamDto> AddDreamWithInterpretationAsync(DreamDto dreamDto)
         {
             // Get AI interpretation
-            var interpretation = await _aiService.InterpretDreamAsync(dreamDto.Description);
+            var interpretation = await _aiService.InterpretDreamAsync(dreamDto.Description, dreamDto.InterpretationType);
 
             // Create dream entity
             var dream = new Dream
@@ -135,7 +136,8 @@ namespace AIDreamDecoder.Infrastructure.Services
                 Analysis = new DreamAnalysis
                 {
                     AnalysisResult = interpretation,
-                    Status = AnalysisStatus.Completed
+                    Status = AnalysisStatus.Completed,
+                    InterpretationType=dreamDto.InterpretationType
                 }
             };
 
@@ -172,7 +174,7 @@ namespace AIDreamDecoder.Infrastructure.Services
                 _logger.LogInformation("User {UserId} found or created", userId);
 
                 // AI tabanlı rüya analizi al
-                var interpretation = await _aiService.InterpretDreamAsync(dreamDto.Description);
+                var interpretation = await _aiService.InterpretDreamAsync(dreamDto.Description, dreamDto.InterpretationType);
 
                 // Yeni rüya oluştur
                 var dream = new Dream
@@ -183,7 +185,8 @@ namespace AIDreamDecoder.Infrastructure.Services
                     {
                         AnalysisResult = interpretation,
                         Status = AnalysisStatus.Completed,
-                        CreatedAt = DateTime.UtcNow
+                        CreatedAt = DateTime.UtcNow,
+                        InterpretationType = dreamDto.InterpretationType
                     }
                 };
 

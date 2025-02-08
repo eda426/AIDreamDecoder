@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AIDreamDecoder.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace AIDreamDecoder.Application.Interfaces
 {
     public interface IAIDreamInterpreterService
     {
-        Task<string> InterpretDreamAsync(string dreamDescription);
+        Task<string> InterpretDreamAsync(string dreamDescription, InterpretationType InterpretationType);
     }
 }
